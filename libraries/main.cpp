@@ -10,6 +10,7 @@ void invert(Image &image){
         }
     }
 }
+
 void rotate(Image &image){
     cout<<"please enter the rotation degree : ";
     int rotarion;
@@ -47,13 +48,20 @@ void rotate(Image &image){
     }
     
 }
+
 int main(){
-    string filename, new_filename;
+    string filename, new_filename,filter;
     cout<<"please enter your file name : ";
     cin>>filename;
     Image image(filename);
-    // invert(image);
-    rotate(image);
+    cout<<"avilable filters : invert / rotate\n";
+    cout<<"please enter your filter : ";
+    cin>>filter;
+    if(filter == "invert"){
+        invert(image);
+    }else if(filter == "rotate"){
+        rotate(image);
+    }
     cout<<"please enter your new file name : ";
     cin>>new_filename;
     image.saveImage("D:/image filters/filters/images/new_toy90.png");

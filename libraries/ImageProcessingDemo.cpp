@@ -8,7 +8,7 @@ int main() {
     string filename;
     cout << "Pls enter colored image name to turn to gray scale: ";
     cin >> filename;
-
+    
     Image image(filename);
 
     for (int i = 0; i < image.width; ++i) {
