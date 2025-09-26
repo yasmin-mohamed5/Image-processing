@@ -50,10 +50,10 @@ void rotate(Image &image){
 }
 
 int main(){
-    string file_name, new_filename,filter;
-    // cout<<"please enter your file name : ";
-    // cin>>file_name;
-    Image image("D:/image filters/Image-processing/images/luffy.jpg");
+    string file_name, newfilename,filter;
+    cout<<"please enter your file name : ";
+    getline(cin,file_name);
+    Image image(file_name);
     cout<<"avilable filters : invert / rotate\n";
     cout<<"please enter your filter : ";
     cin>>filter;
@@ -62,9 +62,9 @@ int main(){
     }else if(filter == "rotate"){
         rotate(image);
     }
-    // cout<<"please enter your new file name : ";
-    // cin>>new_filename;
-    image.saveImage("D:/image filters/Image-processing/images/new_luffy.png");
+    cout<<"please enter your new file name : ";
+    getline(cin,newfilename);
+    image.saveImage(newfilename);
 
     return 0;
 }
