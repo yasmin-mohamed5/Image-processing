@@ -84,15 +84,8 @@ int main(){
                 }else if(x == 2){
                     cout<<"please enter the new file name : ";
                     cin>>newfilename;
-                    try {
-                        bool loaded = image.loadNewImage(newfilename);  
-                        if (loaded) {
-                            image.saveImage(newfilename);
-                            cout<<"file saved successfully!\n";
-                        }
-                    } catch (const invalid_argument& e) {
-                        cout << "Error: " << e.what() << '\n';
-                    }
+                    image.saveImage(newfilename);
+                    cout<<"image savesd successfully\n";
                 }else{
                     cout<<"you enter the wrong number\n";
                 }
@@ -124,15 +117,8 @@ int main(){
             }else if(x == 2){
                 cout<<"please enter the new file name : ";
                 cin>>newfilename;
-                try {
-                    bool loaded = image.loadNewImage(newfilename);  
-                    if (loaded) {
-                        image.saveImage(newfilename);
-                        cout<<"file saved successfully!\n";                        
-                    }
-                } catch (const invalid_argument& e) {
-                    cout << "Error: " << e.what() << '\n';
-                }
+                image.saveImage(newfilename);
+                cout<<"image savesd successfully\n";
             }else{
                 cout<<"you enter the wrong number\n";
             }
