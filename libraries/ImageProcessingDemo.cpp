@@ -9,7 +9,7 @@ int main() {
     cout << "Pls enter colored image name to turn to gray scale: ";
     cin >> filename;
     
-    Image image(filename);
+    Image image(Image-processing/images/arrow.jpg);
 
     for (int i = 0; i < image.width; ++i) {
         for (int j = 0; j < image.height; ++j) {

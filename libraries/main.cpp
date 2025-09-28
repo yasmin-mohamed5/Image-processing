@@ -48,6 +48,9 @@ void rotate(Image &image){
     }
 
 }
+void grey_scale(Image &image){
+    
+}
 
 int main(){
     string file_name, new_filename,filter;
