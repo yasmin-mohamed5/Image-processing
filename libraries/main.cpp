@@ -50,6 +50,109 @@ void rotate(Image &image){
     cout<<"The filter has been applied successfully!\n";
 }
 void grey_scale(Image &image){
+        for (int i=0; i<image.width;i++){
+        for (int j=0; j<image.height;j++){
+            unsigned int avrege=0;
+            for (int k=0;k<3;k++){
+                avrege+=image(i,j,k);
+            }
+            avrege=avrege/3;
+            image(i,j,0)=avrege;
+            image(i,j,1)=avrege;
+            image(i,j,2)=avrege;
+        }
+    }
+    cout<<"The filter has been applied successfully!\n"; 
+}
+void darken_lighten(Image &image){
+    string choice;
+    cout<<"darken or lighten?\n";
+    cin>>choice;
+    cout<<"Enter percentege from 0-->100\n";
+    int percent;
+    cin>>percent;
+    double num= 1.0;
+    double val= percent/100.0;
+    if(choice=="darken"){
+        num=1.0-val;
+    }else if(choice=="lighten"){
+        num=1.0+val;
+    }else{
+        cout<<"wrong";
+        return;
+    }
+    for(int i=0; i<image.width; i++){
+        for(int j=0;j< image.height; j++){
+            for(int k=0; k<3;k++){
+                int pix= image(i,j,k)*num;
+                if(pix>255){
+                    pix=255;
+                }else if(pix<0){
+                    pix=0;
+                }
+                image(i,j,k)=pix;
+            }
+        }
+    }
+    cout<<"The filter has been applied successfully!\n";
+}
+
+void black_and_white(Image &image){
+    for(int i =0 ;i<image.width; i++){
+        for(int j=0;j<image.height ;j++){
+            int threshold=128;
+
+            int r =image(i,j,0);
+            int g=image(i ,j,1);
+            int b= image(i,j,2);
+
+            int gray = (r+g+b)/3;
+            if(gray>=threshold){
+                image(i,j,0)=255;
+                image(i,j,1)=255;
+                image(i,j,2)=255;
+            }
+            else{
+                image(i,j,0)=0;
+                image(i,j,1)=0;
+                image(i,j,2)=0;
+            }
+        }
+    }
+    cout<<"The filter has been applied successfully!\n";
+}
+
+void Flip_image(Image &image){
+    char type;
+    
+    cout<<"h-horezontal or v-vertical\n";
+    cout<<"enter the type: ";
+    cin>>type;
+    if(type =='h'){
+        for(int i=0;i<image.width/2;i++){
+            for(int j=0;j<image.height;j++){
+                for(int c=0;c<3;c++){
+                    int values = image(i,j,c);
+                    image(i,j,c)=image(image.width-1-i,j,c);
+                    image(image.width-1-i,j,c)=values;
+                }     
+            }
+        }
+    
+    cout<<"H filpapplied successfully!\n";
+    }
+    else if(type =='v'){
+        for(int i=0;i<image.width;i++){
+            for(int j=0;j<image.height/2;j++){
+                for(int c=0;c<3;c++){
+                    int values=image(i,j,c);
+                    image(i,j,c)=image(i,image.height-1-j,c);
+                    image(i,image.height-1-j,c)=values;
+                }
+            }
+        }
+        cout<<"v flip applied successfully! \n";
+    }
     
 }
 
@@ -69,8 +172,8 @@ int main(){
         cout << "Error: " << e.what() << '\n';
     }
     while(true){
-        cout<< "please enter a number from the following choices:\n";
-        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-save / 5-Exit\n";
+        cout<< "please enter a number from the following choices:\n"; 
+        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white / 7-flip_image / 8-save / 9-exit\n";
         int choice;
         cin>>choice;
         if(choice == 1){
@@ -84,6 +187,7 @@ int main(){
                 cin>>x;
                 if(x==1){
                     image.saveImage(file_name);
+                    cout<<"image savesd successfully\n";
                 }else if(x == 2){
                     cout<<"please enter the new file name : ";
                     cin>>newfilename;
@@ -110,13 +214,23 @@ int main(){
             invert(image);
         }else if(choice == 3){
             rotate(image);
-        }else if(choice == 4){
+        }else if(choice ==4){
+            grey_scale(image);
+        }else if(choice ==5){
+            darken_lighten(image);
+        }else if(choice ==6){
+            //darken_lighten(image);
+            black_and_white(image);
+        }else if(choice ==7){
+            Flip_image(image);
+        }else if(choice == 8){
             cout<< "please enter a number from the following choices:\n";
             cout<<"do you want to 1-save on the same file or 2-change file name\n";
             int x;
             cin>>x;
             if(x==1){
                 image.saveImage(file_name);
+                cout<<"image savesd successfully\n";
             }else if(x == 2){
                 cout<<"please enter the new file name : ";
                 cin>>newfilename;
@@ -125,13 +239,11 @@ int main(){
             }else{
                 cout<<"you enter the wrong number\n";
             }
-        }else if(choice == 5){
+        }else if(choice == 9){
             break;
         }else{
             cout<<"you enter the wrong number\n";
         }
     }
-
-
     return 0;
 }
