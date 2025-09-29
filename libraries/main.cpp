@@ -124,20 +124,18 @@ void black_and_white(Image &image){
 
 void Flip_image(Image &image){
     char type;
-    
-    cout<<"h-horezontal or v-vertical\n";
-    cout<<"enter the type: ";
+    cout<<"enter the type h-horizontal Or v-vertical: "; // options to select
     cin>>type;
     if(type =='h'){
         for(int i=0;i<image.width/2;i++){
-            for(int j=0;j<image.height;j++){
-                for(int c=0;c<3;c++){
-                    int values = image(i,j,c);
-                    image(i,j,c)=image(image.width-1-i,j,c);
-                    image(image.width-1-i,j,c)=values;
-                }     
-            }
-        }
+        for(int j=0;j<image.height;j++){
+            for(int c=0;c<3;c++){
+                int values = image(i,j,c);
+                image(i,j,c)=image(image.width-1-i,j,c);
+                image(image.width-1-i,j,c)=values;
+            }     
+         }
+      }
     
     cout<<"H filpapplied successfully!\n";
     }
@@ -219,7 +217,6 @@ int main(){
         }else if(choice ==5){
             darken_lighten(image);
         }else if(choice ==6){
-            //darken_lighten(image);
             black_and_white(image);
         }else if(choice ==7){
             Flip_image(image);
