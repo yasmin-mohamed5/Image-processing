@@ -11,6 +11,16 @@ Description:
     used in the project. The filters include:
         - Rotate: Rotates the image by 90/180/270 degrees.
         - Invert: Inverts the colors of the image (produces a negative effect).
+
+
+    - Rawda Amr Mustafa (ID: 20240200) 
+        Implemented: grey-scale, lighten_darken.
+
+Description:
+    This file contains implementations of image filters 
+    used in the project. The filters include:
+        - grey scale: Turns the image into shades of grey.
+        - lighten_darken: adjusts the brightness to make the image lighter or darker.
 */
 
 
