@@ -3,7 +3,7 @@
     Section: 24
 
     Team Members:
-    - Yasmin Mohamed (ID: XXXXX) 
+    - Yasmin Mohamed (ID: 20240658) 
         Implemented: Rotate Filter, Invert Filter
 
 Description:
@@ -270,7 +270,32 @@ int main(){
                 cout<<"you enter the wrong number\n";
             }
         }else if(choice == 9){
-            break;
+            cout<<"do you want to save the image before exit\n";
+            cout<<"1-yes / any number-no : ";
+            int y;
+            cin>>y;
+            if(y==1){
+                cout<< "please enter a number from the following choices:\n";
+                cout<<"do you want to 1-save on the same file or 2-change file name\n";
+                int x;
+                cin>>x;
+                if(x==1){
+                    image.saveImage(file_name);
+                    cout<<"image savesd successfully\n";
+                }else if(x == 2){
+                    cout<<"please enter the new file name : ";
+                    cin>>newfilename;
+                    try{
+                        bool save = image.saveImage(newfilename);
+                        if(save){
+                            image.saveImage(newfilename);
+                            cout<<"image savesd successfully\n";
+                        }
+                    }catch(const invalid_argument& e){
+                        cout << "Error: " << e.what() << '\n';
+                    }
+                }
+            }else{break;}
         }else{
             cout<<"you enter the wrong number\n";
         }
