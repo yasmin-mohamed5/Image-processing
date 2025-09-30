@@ -22,6 +22,8 @@ Description:
 
 #include"Image_Class.h"
 using namespace std;
+#include<bits/stdc++.h>
+
 void invert(Image &image){
     for (int i = 0; i < image.width; i++){
         for(int j=0;j<image.height;j++){
@@ -86,27 +88,15 @@ void grey_scale(Image &image){
     }
     cout<<"The filter has been applied successfully!\n"; 
 }
-void darken_lighten(Image &image){
+ void darken_lighten(Image &image){
     string choice;
     cout<<"darken or lighten?\n";
     cin>>choice;
-    cout<<"Enter percentege from 0-->100\n";
-    int percent;
-    cin>>percent;
-    double num= 1.0;
-    double val= percent/100.0;
     if(choice=="darken"){
-        num=1.0-val;
-    }else if(choice=="lighten"){
-        num=1.0+val;
-    }else{
-        cout<<"wrong";
-        return;
-    }
-    for(int i=0; i<image.width; i++){
+        for(int i=0; i<image.width; i++){
         for(int j=0;j< image.height; j++){
             for(int k=0; k<3;k++){
-                int pix= image(i,j,k)*num;
+                double pix= image(i,j,k)*0.5;
                 if(pix>255){
                     pix=255;
                 }else if(pix<0){
@@ -115,6 +105,23 @@ void darken_lighten(Image &image){
                 image(i,j,k)=pix;
             }
         }
+    }
+    }else if(choice=="lighten"){
+        for(int i=0; i<image.width; i++){
+        for(int j=0;j< image.height; j++){
+            for(int k=0; k<3;k++){
+                double pix= image(i,j,k)*1.5;
+                if(pix>255){
+                    pix=255;
+                }else if(pix<0){
+                    pix=0;
+                }
+                image(i,j,k)=pix;
+            }
+        }
+    }}else{
+        cout<<"wrong";
+        return;
     }
     cout<<"The filter has been applied successfully!\n";
 }
