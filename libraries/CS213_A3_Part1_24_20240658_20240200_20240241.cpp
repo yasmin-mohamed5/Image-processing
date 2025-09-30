@@ -295,7 +295,8 @@ int main(){
                         cout << "Error: " << e.what() << '\n';
                     }
                 }
-            }else{break;}
+            }
+            break;
         }else{
             cout<<"you enter the wrong number\n";
         }
