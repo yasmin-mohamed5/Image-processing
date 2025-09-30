@@ -4,10 +4,13 @@
 
     Team Members:
     - Yasmin Mohamed (ID: 20240658) 
-        Implemented: Rotate Filter, Invert Filter
+        Implemented: Rotate Filter, Invert Filter.
 
     - Rawda Amr Mustafa (ID: 20240200) 
         Implemented: grey-scale, lighten_darken.
+
+    - Salma Mohamed Mahmoud (ID: 20240241)
+      Iplemented: Black and White, Flip Image.    
 
 Description:
     This file contains implementations of image filters 
@@ -16,6 +19,9 @@ Description:
         - Invert: Inverts the colors of the image (produces a negative effect).
         - grey scale: Turns the image into shades of grey.
         - lighten_darken: adjusts the brightness to make the image lighter or darker.
+        - Black and White: This filter converts an image into a pure black and white version with no gray shades.
+        - Flip Image: This filter mirrors the image either horizontally or vertically.
+    
 */
 
 
