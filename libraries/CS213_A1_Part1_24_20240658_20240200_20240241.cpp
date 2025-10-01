@@ -28,6 +28,8 @@ Description:
 
 #include"Image_Class.h"
 using namespace std;
+#include<bits/stdc++.h>
+
 void invert(Image &image){
     for (int i = 0; i < image.width; i++){
         for(int j=0;j<image.height;j++){
@@ -96,23 +98,11 @@ void darken_lighten(Image &image){
     string choice;
     cout<<"darken or lighten?\n";
     cin>>choice;
-    cout<<"Enter percentege from 0-->100\n";
-    int percent;
-    cin>>percent;
-    double num= 1.0;
-    double val= percent/100.0;
     if(choice=="darken"){
-        num=1.0-val;
-    }else if(choice=="lighten"){
-        num=1.0+val;
-    }else{
-        cout<<"wrong";
-        return;
-    }
-    for(int i=0; i<image.width; i++){
+        for(int i=0; i<image.width; i++){
         for(int j=0;j< image.height; j++){
             for(int k=0; k<3;k++){
-                int pix= image(i,j,k)*num;
+                double pix= image(i,j,k)*0.5;
                 if(pix>255){
                     pix=255;
                 }else if(pix<0){
@@ -121,6 +111,23 @@ void darken_lighten(Image &image){
                 image(i,j,k)=pix;
             }
         }
+    }
+    }else if(choice=="lighten"){
+        for(int i=0; i<image.width; i++){
+        for(int j=0;j< image.height; j++){
+            for(int k=0; k<3;k++){
+                double pix= image(i,j,k)*1.5;
+                if(pix>255){
+                    pix=255;
+                }else if(pix<0){
+                    pix=0;
+                }
+                image(i,j,k)=pix;
+            }
+        }
+    }}else{
+        cout<<"wrong";
+        return;
     }
     cout<<"The filter has been applied successfully!\n";
 }
@@ -152,7 +159,7 @@ void black_and_white(Image &image){
 
 void Flip_image(Image &image){
     char type;
-    cout<<"enter the type h-horizontal Or v-vertical: "; // options to select
+    cout<<"enter the type h-horizontal Or v-vertical: ";
     cin>>type;
     if(type =='h'){
         for(int i=0;i<image.width/2;i++){
@@ -199,7 +206,7 @@ int main(){
     }
     while(true){
         cout<< "please enter a number from the following choices:\n"; 
-        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white / 7-flip_image / 8-save / 9-exit\n";
+        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white / 7-flip_image / 8-blur / 9-save / 10-exit\n";
         int choice;
         cin>>choice;
         if(choice == 1){
@@ -257,6 +264,9 @@ int main(){
         }else if(choice ==7){
             Flip_image(image);
         }else if(choice == 8){
+            blur(image);
+        }
+        else if(choice == 9){
             cout<< "please enter a number from the following choices:\n";
             cout<<"do you want to 1-save on the same file or 2-change file name\n";
             int x;
@@ -280,7 +290,7 @@ int main(){
             }else{
                 cout<<"you enter the wrong number\n";
             }
-        }else if(choice == 9){
+        }else if(choice == 10){
             cout<<"do you want to save the image before exit\n";
             cout<<"1-yes / any number-no : ";
             int y;
