@@ -206,7 +206,7 @@ int main(){
     }
     while(true){
         cout<< "please enter a number from the following choices:\n"; 
-        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white / 7-flip_image / 8-blur / 9-save / 10-exit\n";
+        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white / 7-flip_image / 8-save / 9-exit\n";
         int choice;
         cin>>choice;
         if(choice == 1){
@@ -263,10 +263,8 @@ int main(){
             black_and_white(image);
         }else if(choice ==7){
             Flip_image(image);
-        }else if(choice == 8){
-            blur(image);
         }
-        else if(choice == 9){
+        else if(choice == 8){
             cout<< "please enter a number from the following choices:\n";
             cout<<"do you want to 1-save on the same file or 2-change file name\n";
             int x;
@@ -290,7 +288,7 @@ int main(){
             }else{
                 cout<<"you enter the wrong number\n";
             }
-        }else if(choice == 10){
+        }else if(choice == 9){
             cout<<"do you want to save the image before exit\n";
             cout<<"1-yes / any number-no : ";
             int y;
