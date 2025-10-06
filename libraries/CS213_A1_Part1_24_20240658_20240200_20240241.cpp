@@ -4,7 +4,7 @@
 
     Team Members:
     - Yasmin Mohamed (ID: 20240658) 
-        Implemented: Rotate Filter, Invert Filter.
+        Implemented: Rotate Filter, Invert Filter, frame Filter.
 
     - Rawda Amr Mustafa (ID: 20240200) 
         Implemented: grey-scale, lighten_darken.
@@ -17,6 +17,7 @@ Description:
     used in the project. The filters include:
         - Rotate: Rotates the image by 90/180/270 degrees.
         - Invert: Inverts the colors of the image (produces a negative effect).
+        - Frame: Adds a decorative border to the image (Simple is blue, Fancy is white and red striped).
         - grey scale: Turns the image into shades of grey.
         - lighten_darken: adjusts the brightness to make the image lighter or darker.
         - Black and White: This filter converts an image into a pure black and white version with no gray shades.
@@ -76,9 +77,108 @@ void rotate(Image &image){
             }
         }
         image = img2;
+    }else{
+        cout<<"wrong input\n";
+        return;
     }
     cout<<"The filter has been applied successfully!\n";
 }
+
+void frame(Image &image){
+    cout<<"do you want a 1-simple or 2-fancy frame : ";
+    int choice;
+    cin>>choice;
+    if(choice ==1){ // simple blue
+        for(int i=0;i<image.width;i++){
+            for (int j=0;j<16;j++){
+                image(i,j,0)=0;
+                image(i,j,1)=0;
+                image(i,j,2)=255;
+            }
+        }
+        for(int i=0;i<image.width;i++){
+            for (int j=image.height-1;j>image.height-16;j--){
+                image(i,j,0)=0;
+                image(i,j,1)=0;
+                image(i,j,2)=255;
+            }
+        }
+        for(int i=0;i<16;i++){
+            for (int j=0;j<image.height;j++){
+                image(i,j,0)=0;
+                image(i,j,1)=0;
+                image(i,j,2)=255;
+            }
+        }
+        for(int i=image.width-1;i>image.width-16;i--){
+            for (int j=0; j<image.height;j++){
+                image(i,j,0)=0;
+                image(i,j,1)=0;
+                image(i,j,2)=255;
+            }
+        }
+    }else if(choice == 2){ // fancy red & white
+        for(int i=0;i<image.width;i++){
+            for (int j=0;j<16;j++){
+                if((i/20)%2==0){
+                    image(i,j,0)=255;
+                    image(i,j,1)=0;
+                    image(i,j,2)=0;
+                }else{
+                    image(i,j,0)=255;
+                    image(i,j,1)=255;
+                    image(i,j,2)=255;
+                }
+            }
+        }
+        for(int i=0;i<image.width;i++){
+            for (int j=image.height-1;j>image.height-16;j--){
+                if((i/20)%2==0){
+                    image(i,j,0)=255;
+                    image(i,j,1)=0;
+                    image(i,j,2)=0;
+                }else{
+                    image(i,j,0)=255;
+                    image(i,j,1)=255;
+                    image(i,j,2)=255;
+                }
+                
+            }
+        }
+        for(int i=0;i<16;i++){
+            for (int j=0;j<image.height;j++){
+                if((j/20)%2==0){
+                    image(i,j,0)=255;
+                    image(i,j,1)=0;
+                    image(i,j,2)=0;
+                }else{
+                    image(i,j,0)=255;
+                    image(i,j,1)=255;
+                    image(i,j,2)=255;
+                }
+            }
+        }
+        for(int i=image.width-1;i>image.width-16;i--){
+            for (int j=0; j<image.height;j++){
+                if((j/20)%2==0){
+                    image(i,j,0)=255;
+                    image(i,j,1)=0;
+                    image(i,j,2)=0;
+                }else{
+                    image(i,j,0)=255;
+                    image(i,j,1)=255;
+                    image(i,j,2)=255;
+                }
+            }
+        }
+    }else{
+        cout<<"wrong input \n";
+        return;
+    }
+    cout<<"The filter has been applied successfully!\n";
+} 
+
+
 void grey_scale(Image &image){
         for (int i=0; i<image.width;i++){
         for (int j=0; j<image.height;j++){
@@ -206,7 +306,7 @@ int main(){
     }
     while(true){
         cout<< "please enter a number from the following choices:\n"; 
-        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white / 7-flip_image / 8-save / 9-exit\n";
+        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white / 7-flip_image / 8-frame / 9-save / 10-exit\n";
         int choice;
         cin>>choice;
         if(choice == 1){
@@ -263,8 +363,10 @@ int main(){
             black_and_white(image);
         }else if(choice ==7){
             Flip_image(image);
+        }else if(choice ==8){
+            frame(image);
         }
-        else if(choice == 8){
+        else if(choice == 9){
             cout<< "please enter a number from the following choices:\n";
             cout<<"do you want to 1-save on the same file or 2-change file name\n";
             int x;
@@ -288,7 +390,7 @@ int main(){
             }else{
                 cout<<"you enter the wrong number\n";
             }
-        }else if(choice == 9){
+        }else if(choice == 10){
             cout<<"do you want to save the image before exit\n";
             cout<<"1-yes / any number-no : ";
             int y;
