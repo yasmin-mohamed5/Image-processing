@@ -432,38 +432,41 @@ void resizing_image(Image &image){
     cout<<"enter r-ratio or  d-new dimension. \n";
     cin>>type;
     if(type=='r'){
-        float ratio;
+        double ratio;
         cout<<"enter the ratio.\n ";
         cin>>ratio;
+
+        new_width=image.width*ratio;
+        new_height=image.height*ratio;
+
         if(new_width<=0 || new_height<=0){
             cout<<"invalid. \n ";
             return;
         }
-        int new_width=image.width*ratio;
-        int new_height=image.height*ratio;
-
+        
     }
     if(type=='d'){
-        
         int w,h;
         cout<<"enter the new dimensions.\n ";
         cin>>w>>h;
+        new_width=w;
+        new_height=h;
     }
-    int w_ratio= (float)image.width/new_width;
-    int h_ratio=(float)image.height/new_height;
+   
 
     Image resized_image(new_width,new_height);
 
     for(int i=0;i<new_width;i++){
         for(int j=0;j<new_height;j++){
-            int old_h= i*w_ratio;
-            int old_w= j*w_ratio;
+            int old_w= i*(image.width)/new_width;
+            int old_h= j*(image.height)/new_height;
             for(int c=0;c<3;c++){
-                resized_image(i,j,c)=image(old_h,old_w,c);
+                resized_image(i,j,c)=image(old_w,old_h,c);
             }
         }
     }
     image = resized_image;
+    cout<< "Image resized successfully \n";
 
 }
 
