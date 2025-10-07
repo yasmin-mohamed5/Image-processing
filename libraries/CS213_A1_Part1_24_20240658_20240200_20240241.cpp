@@ -289,6 +289,7 @@ void Flip_image(Image &image){
     
 }
 void Crop_image(Image &image){
+    cout<<" width: "<<image.width<<" height: "<<image.height<<'\n';
     int x;
     cout<< "x-enter the horizontal point. \n";
     cin >> x;
