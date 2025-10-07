@@ -10,7 +10,7 @@
         Implemented: grey-scale, lighten_darken.
 
     - Salma Mohamed Mahmoud (ID: 20240241)
-        Iplemented: Black and White, Flip Image.    
+        Implemented: Black and White, Flip Image.    
 
 Description:
     This file contains implementations of image filters 
@@ -379,6 +379,35 @@ void Flip_image(Image &image){
     }
     
 }
+void Crop_image(Image &image){
+    int x;
+    cout<< "x-enter the horizontal point. \n";
+    cin >> x;
+    int y;
+    cout<<"y-enter the vertical point. \n";
+    cin >> y;
+    int new_width , new_height;
+    cout <<"enter new_width and new_height. \n ";
+    cin>> new_width >> new_height;
+
+    if(x+new_width>image.width || y+new_height>image.height){
+        cout<<"Dimensions are larger than the original image dimensions.\n ";
+    }
+    else{
+     Image cropped_image(new_width,new_height);
+
+     for(int i=0;i<new_width;i++){
+        for(int j=0;j<new_height;j++){
+            for(int c=0;c<3;c++){
+                cropped_image(i,j,c)=image(x+i,y+j,c); 
+            }
+          }
+        }
+        image=cropped_image;
+     }
+     
+}
+
 
 int main(){
     string file_name, newfilename;
@@ -397,7 +426,7 @@ int main(){
     }
     while(true){
         cout<< "please enter a number from the following choices:\n"; 
-        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten /\n 6-black_and_white / 7-flip_image / 8-frame / 9-blur / 10-save / 11-exit\n";
+        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white / 7-flip_image / 8-frame / 9-Crop_image / 10-blur / 11-save / 12-exit\n";
         int choice;
         cin>>choice;
         if(choice == 1){
@@ -456,10 +485,12 @@ int main(){
             Flip_image(image);
         }else if(choice ==8){
             frame(image);
-        }else if(choice == 9){
+        }else if(choice==9){
+            Crop_image(image);
+        }else if(choice == 10){
             blur(image);
         }
-        else if(choice == 10){
+        else if(choice == 11){
             cout<< "please enter a number from the following choices:\n";
             cout<<"do you want to 1-save on the same file or 2-change file name\n";
             int x;
@@ -483,7 +514,7 @@ int main(){
             }else{
                 cout<<"you enter the wrong number\n";
             }
-        }else if(choice == 11){
+        }else if(choice == 12){
             cout<<"do you want to save the image before exit\n";
             cout<<"1-yes / any number-no : ";
             int y;
