@@ -568,7 +568,7 @@ int main(){
     }
     while(true){
         cout<< "please enter a number from the following choices:\n"; 
-        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white / 7-flip_image / 8-frame /\n 9-Crop_image / 10-blur / 11-merge_image / 12-detect_edge / 13-frame / 14-corp / 15-sinlight / 16-resizing-image /17-save / 18-exit\n";
+        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white / 7-flip_image / 8-frame /\n 9-Crop_image / 10-blur / 11-merge_image / 12-detect_edge / 13-sinlight / 14-resizing-image /15-save / 16-exit\n";
         int choice;
         cin>>choice;
         if(choice == 1){
@@ -642,18 +642,11 @@ int main(){
         }else if(choice ==12){
             detect_edge(image);
         }else if(choice == 13){
-            frame(image);
-        }
-        else if(choice==14){
-            Crop_image(image);
-        }else if(choice == 15){
             sunlight(image);
         }
-        else if(choice==16) {
+        else if(choice==14) {
             resizing_image(image);
-        }
-        
-        else if(choice == 17){
+        }else if(choice == 15){
             cout<< "please enter a number from the following choices:\n";
             cout<<"do you want to 1-save on the same file or 2-change file name \n";
             int x;
@@ -677,7 +670,7 @@ int main(){
             }else{
                 cout<<"you enter the wrong number\n";
             }
-        }else if(choice == 18){
+        }else if(choice == 16){
             cout<<"do you want to save the image before exit\n";
             cout<<"1-yes / any number-no : ";
             int y;
