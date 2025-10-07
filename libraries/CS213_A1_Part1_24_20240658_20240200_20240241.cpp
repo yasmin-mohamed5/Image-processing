@@ -12,6 +12,7 @@
     - Salma Mohamed Mahmoud (ID: 20240241)
         Implemented: Black and White, Flip Image, Crop Images, Resizing Images.    
 
+        
 Description:
     This file contains implementations of image filters 
     used in the project. The filters include:
