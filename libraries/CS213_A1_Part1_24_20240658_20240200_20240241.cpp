@@ -4,7 +4,7 @@
 
     Team Members:
     - Yasmin Mohamed (ID: 20240658) 
-        Implemented: Rotate Filter, Invert Filter, frame Filter.
+        Implemented: Rotate Filter, Invert Filter, frame Filter ,blur Filter.
 
     - Rawda Amr Mustafa (ID: 20240200) 
         Implemented: grey-scale, lighten_darken.
@@ -18,6 +18,7 @@ Description:
         - Rotate: Rotates the image by 90/180/270 degrees.
         - Invert: Inverts the colors of the image (produces a negative effect).
         - Frame: Adds a decorative border to the image (Simple is blue, Fancy is white and red striped).
+        - Blur: Softens the image by averaging neighboring pixels, with three levels of blur intensity (low, medium, and high) that control how smooth and hazy the result appears.
         - grey scale: Turns the image into shades of grey.
         - lighten_darken: adjusts the brightness to make the image lighter or darker.
         - Black and White: This filter converts an image into a pure black and white version with no gray shades.
@@ -178,6 +179,96 @@ void frame(Image &image){
     cout<<"The filter has been applied successfully!\n";
 } 
 
+void blur(Image &image){
+    Image img=image;
+    cout<<"enter the Blur intensity 1 or 2 or 3 : ";
+    int intensity;
+    cin>>intensity;
+    if(intensity == 1){
+        int rad=1;
+        for(int i=0;i<image.width;i++){
+            for(int j=0;j<image.height;j++){
+                double r=0,g=0,b=0,count=0;
+                for(int x=-rad;x<rad;x++){
+                    for (int y=-rad;y<rad;y++){
+                        int new_x=i+x;
+                        int new_y=j+y;
+                        if(new_x<0 || new_y<0 || new_x>=image.width || new_y>=image.height){
+                            continue;
+                        } 
+                        r+=img(new_x,new_y,0);
+                        g+=img(new_x,new_y,1);
+                        b+=img(new_x,new_y,2);
+                        count++;
+                    }
+                }
+                r/=count;
+                g/=count;
+                b/=count;
+                image(i,j,0)=r;
+                image(i,j,1)=g;
+                image(i,j,2)=b;
+            }
+        }
+    }else if(intensity == 2){
+        int rad=3;
+        for(int i=0;i<image.width;i++){
+            for(int j=0;j<image.height;j++){
+                double r=0,g=0,b=0,count=0;
+                for(int x=-rad;x<rad;x++){
+                    for (int y=-rad;y<rad;y++){
+                        int new_x=i+x;
+                        int new_y=j+y;
+                        if(new_x<0 || new_y<0 || new_x>=image.width || new_y>=image.height){
+                            continue;
+                        } 
+                        r+=img(new_x,new_y,0);
+                        g+=img(new_x,new_y,1);
+                        b+=img(new_x,new_y,2);
+                        count++;
+                    }
+                }
+                r/=count;
+                g/=count;
+                b/=count;
+                image(i,j,0)=r;
+                image(i,j,1)=g;
+                image(i,j,2)=b;
+            }
+        }
+    }else if(intensity == 3){
+        int rad=5;
+        for(int i=0;i<image.width;i++){
+            for(int j=0;j<image.height;j++){
+                double r=0,g=0,b=0,count=0;
+                for(int x=-rad;x<rad;x++){
+                    for (int y=-rad;y<rad;y++){
+                        int new_x=i+x;
+                        int new_y=j+y;
+                        if(new_x<0 || new_y<0 || new_x>=image.width || new_y>=image.height){
+                            continue;
+                        } 
+                        r+=img(new_x,new_y,0);
+                        g+=img(new_x,new_y,1);
+                        b+=img(new_x,new_y,2);
+                        count++;
+                    }
+                }
+                r/=count;
+                g/=count;
+                b/=count;
+                image(i,j,0)=r;
+                image(i,j,1)=g;
+                image(i,j,2)=b;
+            }
+        }
+    }else{
+        cout<<"wrong input\n";
+        return;
+    }
+    
+    cout<<"The filter has been applied successfully!\n";
+}
 
 void grey_scale(Image &image){
         for (int i=0; i<image.width;i++){
@@ -306,7 +397,7 @@ int main(){
     }
     while(true){
         cout<< "please enter a number from the following choices:\n"; 
-        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white / 7-flip_image / 8-frame / 9-save / 10-exit\n";
+        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten /\n 6-black_and_white / 7-flip_image / 8-frame / 9-blur / 10-save / 11-exit\n";
         int choice;
         cin>>choice;
         if(choice == 1){
@@ -365,8 +456,10 @@ int main(){
             Flip_image(image);
         }else if(choice ==8){
             frame(image);
+        }else if(choice == 9){
+            blur(image);
         }
-        else if(choice == 9){
+        else if(choice == 10){
             cout<< "please enter a number from the following choices:\n";
             cout<<"do you want to 1-save on the same file or 2-change file name\n";
             int x;
@@ -390,7 +483,7 @@ int main(){
             }else{
                 cout<<"you enter the wrong number\n";
             }
-        }else if(choice == 10){
+        }else if(choice == 11){
             cout<<"do you want to save the image before exit\n";
             cout<<"1-yes / any number-no : ";
             int y;
