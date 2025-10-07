@@ -426,7 +426,7 @@ int main(){
     }
     while(true){
         cout<< "please enter a number from the following choices:\n"; 
-        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white / 7-flip_image / 8-frame / 9-Crop_image / 10-blur / 11-save / 12-exit\n";
+        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white /\n 7-flip_image / 8-frame / 9-Crop_image / 10-blur / 11-save / 12-exit\n";
         int choice;
         cin>>choice;
         if(choice == 1){
