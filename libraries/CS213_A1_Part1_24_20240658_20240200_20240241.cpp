@@ -4,7 +4,7 @@
 
     Team Members:
     - Yasmin Mohamed (ID: 20240658) 
-        Implemented: Rotate Filter, Invert Filter, frame Filter.
+        Implemented: Rotate Filter, Invert Filter, frame Filter, Blur Filter, Sunlight Filter.
 
     - Rawda Amr Mustafa (ID: 20240200) 
         Implemented: grey-scale, lighten_darken, merge_images,detect_edge .
@@ -12,7 +12,7 @@
     - Salma Mohamed Mahmoud (ID: 20240241)
         Implemented: Black and White, Flip Image, Crop Images, Resizing Images.    
 
-        
+
 Description:
     This file contains implementations of image filters 
     used in the project. The filters include:
@@ -646,7 +646,7 @@ int main(){
             sunlight(image);
         }
         else if(choice==16) {
-             resizing_image(image);
+            resizing_image(image);
         }
         
         else if(choice == 17){
