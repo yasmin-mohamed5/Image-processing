@@ -7,7 +7,7 @@
         Implemented: Rotate Filter, Invert Filter, frame Filter ,blur Filter , sunlight Filter.
 
     - Rawda Amr Mustafa (ID: 20240200) 
-        Implemented: grey-scale, lighten_darken.
+        Implemented: grey-scale, lighten_darken, merge_images,detect_edge .
 
     - Salma Mohamed Mahmoud (ID: 20240241)
         Implemented: Black and White, Flip Image.    
@@ -19,11 +19,13 @@ Description:
         - Invert: Inverts the colors of the image (produces a negative effect).
         - Frame: Adds a decorative border to the image (Simple is blue, Fancy is white and red striped).
         - Blur: Softens the image by averaging neighboring pixels, with three levels of blur intensity (low, medium, and high) that control how smooth and hazy the result appears.
-        -Sunlight: Brightens the image and adds a warm yellowish tone, simulating natural sunlight.
+        - Sunlight: Brightens the image and adds a warm yellowish tone, simulating natural sunlight.
         - grey scale: Turns the image into shades of grey.
         - lighten_darken: adjusts the brightness to make the image lighter or darker.
         - Black and White: This filter converts an image into a pure black and white version with no gray shades.
         - Flip Image: This filter mirrors the image either horizontally or vertically.
+        - detect_edge:Detects image edges by highlighting sharp changes between neighboring pixels.
+        - merge_images:Combines two images by averaging their pixel values.
     
 */
 
@@ -420,6 +422,84 @@ void Crop_image(Image &image){
      
 }
 
+Image merge_images(Image &image1 ,Image &image2){
+    string choice;
+    cout<<"resize or common\n";
+    cin>>choice;
+    int newwid,newhig;
+    if(choice=="resize"){
+        newwid=max(image1.width,image2.width);
+        newhig=max(image1.height,image2.height);
+        Image z1(newwid, newhig);
+        Image z2(newwid, newhig);
+
+        for(int i=0;i<newwid; i++){
+            for (int j=0; j<newhig; j++){
+                int x1= i*image1.width/newwid;
+                int x2= i*image2.width/newwid;
+                int y1= j*image1.height/newhig;
+                int y2= j*image2.height/newhig;
+
+                for(int k=0; k<3; k++){
+                    z1(i,j,k)= image1(x1,y1,k);
+                    z2(i,j,k)= image2(x2,y2,k);
+                }
+            }
+        }
+        image1 =z1;
+        image2 =z2;
+    }else if(choice=="common"){
+        newwid=min(image1.width,image2.width);
+        newhig=min(image1.height,image2.height);
+        Image z1(newwid,newhig);
+        Image z2(newwid,newhig);
+
+        for(int i=0; i<newwid; i++){
+            for(int j=0; j<newhig; j++){
+                for (int k=0; k<3; k++) {
+                    z1(i,j,k)=image1(i,j,k);
+                    z2(i,j,k)=image2(i,j,k);
+                }
+            }
+        }
+        image1=z1;
+        image2 =z2;
+    }else{
+        cout<<"wrong";
+        return image1;
+    }
+    Image merge(newwid,newhig);
+    for(int i=0; i<newwid;i++){
+        for(int j=0; j<newhig; j++){
+            for(int k=0; k<3; k++){
+                merge(i,j,k)=(image1(i,j,k)+image2(i,j,k))/2;
+            }
+        }
+    }
+    cout<<"The filter has been applied successfully!\n";
+    return merge;
+}
+void detect_edge(Image &image){
+    black_and_white(image);
+    Image res(image.width,image.height);
+    for(int i=0; i<image.width; i++){
+        for(int j=0; j<image.height; j++){
+            int y=abs(image(i,j+1,0)-image(i,j,0));
+            int x=abs(image(i+1,j,0)-image(i,j,0));
+            int diff=x+y;
+            if(diff>100){
+                res(i,j,0)=0;
+                res(i,j,1)=0;
+                res(i,j,2)=0;
+            }else{
+                res(i,j,0)=255;
+                res(i,j,1)=255;
+                res(i,j,2)=255;
+            }
+        }
+    }image=res;
+    cout<<"The filter has been applied successfully!\n";
+}
 
 int main(){
     string file_name, newfilename;
@@ -438,7 +518,7 @@ int main(){
     }
     while(true){
         cout<< "please enter a number from the following choices:\n"; 
-        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white /\n 7-flip_image / 8-frame / 9-Crop_image / 10-blur / 11-sunlight / 12-save / 13-exit\n";
+        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white / 7-flip_image /\n 8-frame / 9-Crop_image / 10-blur / 11-merge_image / 12-detect_egde / 13-sunlight / 14-save / 15-exit\n";
         int choice;
         cin>>choice;
         if(choice == 1){
@@ -495,18 +575,28 @@ int main(){
             black_and_white(image);
         }else if(choice ==7){
             Flip_image(image);
-        }else if(choice ==8){
+        }else if(choice == 8){
             frame(image);
         }else if(choice==9){
             Crop_image(image);
         }else if(choice == 10){
             blur(image);
-        }else if(choice == 11){
+        }else if(choice ==11){
+            string secondimage;
+            cout<<"please enter your second image name: ";
+            cin>>secondimage;
+            Image image2;
+            image2.loadNewImage(secondimage);
+            Image merge=merge_images(image,image2);
+            image =merge;  
+        }else if(choice ==12){
+            detect_edge(image);
+        }else if(choice == 13){
             sunlight(image);
         }
-        else if(choice == 12){
+        else if(choice == 14){
             cout<< "please enter a number from the following choices:\n";
-            cout<<"do you want to 1-save on the same file or 2-change file name\n";
+            cout<<"do you want to 1-save on the same file or 2-change file name \n";
             int x;
             cin>>x;
             if(x==1){
@@ -528,7 +618,7 @@ int main(){
             }else{
                 cout<<"you enter the wrong number\n";
             }
-        }else if(choice == 13){
+        }else if(choice == 15){
             cout<<"do you want to save the image before exit\n";
             cout<<"1-yes / any number-no : ";
             int y;
