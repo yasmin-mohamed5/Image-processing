@@ -23,6 +23,9 @@ Description:
         - Black and White: This filter converts an image into a pure black and white version with no gray shades.
         - Flip Image: This filter mirrors the image either horizontally or vertically.
         - Crop Images: This filter removes unwanted parts of an image by selecting a specific rectangular to keep.
+
+
+        
         - Resizing Images: THis filter changes the overall dimensions ( width and height ) of an image while keeping its visual content.
         - detect_edge:Detects image edges by highlighting sharp changes between neighboring pixels.
         - merge_images:Combines two images by averaging their pixel values.
