@@ -4,13 +4,13 @@
 
     Team Members:
     - Yasmin Mohamed (ID: 20240658) 
-        Implemented: Rotate Filter, Invert Filter, frame Filter ,blur Filter , sunlight Filter.
+        Implemented: Rotate Filter, Invert Filter, frame Filter.
 
     - Rawda Amr Mustafa (ID: 20240200) 
         Implemented: grey-scale, lighten_darken, merge_images,detect_edge .
 
     - Salma Mohamed Mahmoud (ID: 20240241)
-        Implemented: Black and White, Flip Image.    
+        Implemented: Black and White, Flip Image, Crop Images, Resizing Images.    
 
 Description:
     This file contains implementations of image filters 
@@ -24,6 +24,8 @@ Description:
         - lighten_darken: adjusts the brightness to make the image lighter or darker.
         - Black and White: This filter converts an image into a pure black and white version with no gray shades.
         - Flip Image: This filter mirrors the image either horizontally or vertically.
+        - Crop Images: This filter removes unwanted parts of an image by selecting a specific rectangular to keep.
+        - Resizing Images: THis filter changes the overall dimensions ( width and height ) of an image while keeping its visual content.
         - detect_edge:Detects image edges by highlighting sharp changes between neighboring pixels.
         - merge_images:Combines two images by averaging their pixel values.
     
@@ -394,6 +396,7 @@ void Flip_image(Image &image){
     
 }
 void Crop_image(Image &image){
+    cout<<" width: "<<image.width<<" height: "<<image.height<<'\n';
     int x;
     cout<< "x-enter the horizontal point. \n";
     cin >> x;
@@ -421,6 +424,7 @@ void Crop_image(Image &image){
      }
      
 }
+
 
 Image merge_images(Image &image1 ,Image &image2){
     string choice;
@@ -518,7 +522,7 @@ int main(){
     }
     while(true){
         cout<< "please enter a number from the following choices:\n"; 
-        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white / 7-flip_image /\n 8-frame / 9-Crop_image / 10-blur / 11-merge_image / 12-detect_egde / 13-sunlight / 14-save / 15-exit\n";
+        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white / 7-flip_image / 8-frame /\n 9-Crop_image / 10-blur / 11-merge_image / 12-detect_edge / 13-frame / 14-corp / 15-sinlight / 16-save / 17-exit\n";
         int choice;
         cin>>choice;
         if(choice == 1){
@@ -592,9 +596,13 @@ int main(){
         }else if(choice ==12){
             detect_edge(image);
         }else if(choice == 13){
-            sunlight(image);
+            frame(image);
         }
-        else if(choice == 14){
+        else if(choice==14){
+            Crop_image(image);
+        }else if(choice == 15){
+            sunlight(image);
+        }else if(choice == 16){
             cout<< "please enter a number from the following choices:\n";
             cout<<"do you want to 1-save on the same file or 2-change file name \n";
             int x;
@@ -618,7 +626,7 @@ int main(){
             }else{
                 cout<<"you enter the wrong number\n";
             }
-        }else if(choice == 15){
+        }else if(choice == 17){
             cout<<"do you want to save the image before exit\n";
             cout<<"1-yes / any number-no : ";
             int y;
