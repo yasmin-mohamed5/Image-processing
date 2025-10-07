@@ -7,7 +7,7 @@
         Implemented: Rotate Filter, Invert Filter, frame Filter ,blur Filter.
 
     - Rawda Amr Mustafa (ID: 20240200) 
-        Implemented: grey-scale, lighten_darken.
+        Implemented: grey-scale, lighten_darken, merge_images,detect_edge .
 
     - Salma Mohamed Mahmoud (ID: 20240241)
         Implemented: Black and White, Flip Image.    
@@ -23,6 +23,8 @@ Description:
         - lighten_darken: adjusts the brightness to make the image lighter or darker.
         - Black and White: This filter converts an image into a pure black and white version with no gray shades.
         - Flip Image: This filter mirrors the image either horizontally or vertically.
+        - detect_edge:Detects image edges by highlighting sharp changes between neighboring pixels.
+        - merge_images:Combines two images by averaging their pixel values.
     
 */
 
