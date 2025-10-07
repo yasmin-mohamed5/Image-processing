@@ -10,7 +10,7 @@
         Implemented: grey-scale, lighten_darken.
 
     - Salma Mohamed Mahmoud (ID: 20240241)
-        Implemented: Black and White, Flip Image.    
+        Implemented: Black and White, Flip Image, Crop Images, Resizing Images.    
 
 Description:
     This file contains implementations of image filters 
@@ -22,6 +22,8 @@ Description:
         - lighten_darken: adjusts the brightness to make the image lighter or darker.
         - Black and White: This filter converts an image into a pure black and white version with no gray shades.
         - Flip Image: This filter mirrors the image either horizontally or vertically.
+        - Crop Images: This filter removes unwanted parts of an image by selecting a specific rectangular to keep.
+        - Resizing Images: THis filter changes the overall dimensions ( width and height ) of an image while keeping its visual content.
     
 */
 
@@ -317,6 +319,48 @@ void Crop_image(Image &image){
      }
      
 }
+void resizing_image(Image &image){
+    cout<<" width: "<<image.width<<" height: "<<image.height<<'\n';
+    char type;
+    int  new_width,new_height;
+    cout<<"enter r-ratio or  d-new dimension. \n";
+    cin>>type;
+    if(type=='r'){
+        float ratio;
+        cout<<"enter the ratio.\n ";
+        cin>>ratio;
+        if(new_width<=0 || new_height<=0){
+            cout<<"invalid. \n ";
+            return;
+        }
+        int new_width=image.width*ratio;
+        int new_height=image.height*ratio;
+
+    }
+    if(type=='d'){
+        
+        int w,h;
+        cout<<"enter the new dimensions.\n ";
+        cin>>w>>h;
+    }
+    int w_ratio= (float)image.width/new_width;
+    int h_ratio=(float)image.height/new_height;
+
+    Image resized_image(new_width,new_height);
+
+    for(int i=0;i<new_width;i++){
+        for(int j=0;j<new_height;j++){
+            int old_h= i*w_ratio;
+            int old_w= j*w_ratio;
+            for(int c=0;c<3;c++){
+                resized_image(i,j,c)=image(old_h,old_w,c);
+            }
+        }
+    }
+    image = resized_image;
+
+}
+
 
 
 int main(){
@@ -336,7 +380,7 @@ int main(){
     }
     while(true){
         cout<< "please enter a number from the following choices:\n"; 
-        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white / 7-flip_image / 8-frame / 9-Crop_image / 10-save / 11-exit\n";
+        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white / 7-flip_image / 8-frame / 9-Crop_image / 10-resizing_image / 11-save / 12-exit\n";
         int choice;
         cin>>choice;
         if(choice == 1){
@@ -399,7 +443,10 @@ int main(){
         else if(choice==9){
             Crop_image(image);
         }
-        else if(choice == 10){
+        else if(choice==10){
+            resizing_image(image);
+        }
+        else if(choice == 11){
             cout<< "please enter a number from the following choices:\n";
             cout<<"do you want to 1-save on the same file or 2-change file name\n";
             int x;
@@ -423,7 +470,7 @@ int main(){
             }else{
                 cout<<"you enter the wrong number\n";
             }
-        }else if(choice == 11){
+        }else if(choice == 12){
             cout<<"do you want to save the image before exit\n";
             cout<<"1-yes / any number-no : ";
             int y;
