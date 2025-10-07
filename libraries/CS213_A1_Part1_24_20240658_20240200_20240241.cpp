@@ -580,7 +580,7 @@ int main(){
         }
         else if(choice == 13){
             cout<< "please enter a number from the following choices:\n";
-            cout<<"do you want to 1-save on the same file or 2-change file name\n";
+            cout<<"do you want to 1-save on the same file or 2-change file name \n";
             int x;
             cin>>x;
             if(x==1){
