@@ -12,20 +12,20 @@
     - Salma Mohamed Mahmoud (ID: 20240241)
         Implemented: Black and White, Flip Image, Crop Images, Resizing Images.    
 
+        
 Description:
     This file contains implementations of image filters 
     used in the project. The filters include:
         - Rotate: Rotates the image by 90/180/270 degrees.
         - Invert: Inverts the colors of the image (produces a negative effect).
         - Frame: Adds a decorative border to the image (Simple is blue, Fancy is white and red striped).
+        - Blur: Softens the image by averaging neighboring pixels, with three levels of blur intensity (low, medium, and high) that control how smooth and hazy the result appears.
+        - Sunlight: Brightens the image and adds a warm yellowish tone, simulating natural sunlight.
         - grey scale: Turns the image into shades of grey.
         - lighten_darken: adjusts the brightness to make the image lighter or darker.
         - Black and White: This filter converts an image into a pure black and white version with no gray shades.
         - Flip Image: This filter mirrors the image either horizontally or vertically.
         - Crop Images: This filter removes unwanted parts of an image by selecting a specific rectangular to keep.
-
-
-        
         - Resizing Images: THis filter changes the overall dimensions ( width and height ) of an image while keeping its visual content.
         - detect_edge:Detects image edges by highlighting sharp changes between neighboring pixels.
         - merge_images:Combines two images by averaging their pixel values.
@@ -185,6 +185,107 @@ void frame(Image &image){
     cout<<"The filter has been applied successfully!\n";
 } 
 
+void blur(Image &image){
+    Image img=image;
+    cout<<"enter the Blur intensity: 1-low / 2-medium / 3-high : ";
+    int intensity;
+    cin>>intensity;
+    if(intensity == 1){
+        int rad=1;
+        for(int i=0;i<image.width;i++){
+            for(int j=0;j<image.height;j++){
+                double r=0,g=0,b=0,count=0;
+                for(int x=-rad;x<rad;x++){
+                    for (int y=-rad;y<rad;y++){
+                        int new_x=i+x;
+                        int new_y=j+y;
+                        if(new_x<0 || new_y<0 || new_x>=image.width || new_y>=image.height){
+                            continue;
+                        } 
+                        r+=img(new_x,new_y,0);
+                        g+=img(new_x,new_y,1);
+                        b+=img(new_x,new_y,2);
+                        count++;
+                    }
+                }
+                r/=count;
+                g/=count;
+                b/=count;
+                image(i,j,0)=r;
+                image(i,j,1)=g;
+                image(i,j,2)=b;
+            }
+        }
+    }else if(intensity == 2){
+        int rad=3;
+        for(int i=0;i<image.width;i++){
+            for(int j=0;j<image.height;j++){
+                double r=0,g=0,b=0,count=0;
+                for(int x=-rad;x<rad;x++){
+                    for (int y=-rad;y<rad;y++){
+                        int new_x=i+x;
+                        int new_y=j+y;
+                        if(new_x<0 || new_y<0 || new_x>=image.width || new_y>=image.height){
+                            continue;
+                        } 
+                        r+=img(new_x,new_y,0);
+                        g+=img(new_x,new_y,1);
+                        b+=img(new_x,new_y,2);
+                        count++;
+                    }
+                }
+                r/=count;
+                g/=count;
+                b/=count;
+                image(i,j,0)=r;
+                image(i,j,1)=g;
+                image(i,j,2)=b;
+            }
+        }
+    }else if(intensity == 3){
+        int rad=5;
+        for(int i=0;i<image.width;i++){
+            for(int j=0;j<image.height;j++){
+                double r=0,g=0,b=0,count=0;
+                for(int x=-rad;x<rad;x++){
+                    for (int y=-rad;y<rad;y++){
+                        int new_x=i+x;
+                        int new_y=j+y;
+                        if(new_x<0 || new_y<0 || new_x>=image.width || new_y>=image.height){
+                            continue;
+                        } 
+                        r+=img(new_x,new_y,0);
+                        g+=img(new_x,new_y,1);
+                        b+=img(new_x,new_y,2);
+                        count++;
+                    }
+                }
+                r/=count;
+                g/=count;
+                b/=count;
+                image(i,j,0)=r;
+                image(i,j,1)=g;
+                image(i,j,2)=b;
+            }
+        }
+    }else{
+        cout<<"wrong input\n";
+        return;
+    }
+    
+    cout<<"The filter has been applied successfully!\n";
+}
+
+void sunlight(Image &image){
+    for(int i=0;i<image.width;i++){
+        for(int j=0;j<image.height;j++){
+            image(i,j,0)=min(image(i,j,0)*1.3,255.0);
+            image(i,j,1)=min(image(i,j,1)*1.2,255.0);
+            image(i,j,2)*=0.8;
+        }
+    }
+    cout<<"The filter has been applied successfully!\n";
+}
 
 void grey_scale(Image &image){
         for (int i=0; i<image.width;i++){
@@ -324,6 +425,47 @@ void Crop_image(Image &image){
      }
      
 }
+void resizing_image(Image &image){
+    cout<<" width: "<<image.width<<" height: "<<image.height<<'\n';
+    char type;
+    int  new_width,new_height;
+    cout<<"enter r-ratio or  d-new dimension. \n";
+    cin>>type;
+    if(type=='r'){
+        float ratio;
+        cout<<"enter the ratio.\n ";
+        cin>>ratio;
+        if(new_width<=0 || new_height<=0){
+            cout<<"invalid. \n ";
+            return;
+        }
+        int new_width=image.width*ratio;
+        int new_height=image.height*ratio;
+
+    }
+    if(type=='d'){
+        
+        int w,h;
+        cout<<"enter the new dimensions.\n ";
+        cin>>w>>h;
+    }
+    int w_ratio= (float)image.width/new_width;
+    int h_ratio=(float)image.height/new_height;
+
+    Image resized_image(new_width,new_height);
+
+    for(int i=0;i<new_width;i++){
+        for(int j=0;j<new_height;j++){
+            int old_h= i*w_ratio;
+            int old_w= j*w_ratio;
+            for(int c=0;c<3;c++){
+                resized_image(i,j,c)=image(old_h,old_w,c);
+            }
+        }
+    }
+    image = resized_image;
+
+}
 
 
 Image merge_images(Image &image1 ,Image &image2){
@@ -422,7 +564,7 @@ int main(){
     }
     while(true){
         cout<< "please enter a number from the following choices:\n"; 
-        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white / 7-flip_image / 8-frame / 9-Crop_image / 10-blur / 11-merge_image / 12-detect_edge / 13-save / 14-exit\n";
+        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white / 7-flip_image / 8-frame /\n 9-Crop_image / 10-blur / 11-merge_image / 12-detect_edge / 13-frame / 14-corp / 15-sinlight / 16-resizing-image /17-save / 18-exit\n";
         int choice;
         cin>>choice;
         if(choice == 1){
@@ -479,6 +621,12 @@ int main(){
             black_and_white(image);
         }else if(choice ==7){
             Flip_image(image);
+        }else if(choice == 8){
+            frame(image);
+        }else if(choice==9){
+            Crop_image(image);
+        }else if(choice == 10){
+            blur(image);
         }else if(choice ==11){
             string secondimage;
             cout<<"please enter your second image name: ";
@@ -489,15 +637,19 @@ int main(){
             image =merge;  
         }else if(choice ==12){
             detect_edge(image);
-        }else if(choice == 8){
+        }else if(choice == 13){
             frame(image);
         }
-        else if(choice==9){
+        else if(choice==14){
             Crop_image(image);
+        }else if(choice == 15){
+            sunlight(image);
+        }
+        else if(choice==16) {
+             resizing_image(image);
         }
         
-        
-        else if(choice == 13){
+        else if(choice == 17){
             cout<< "please enter a number from the following choices:\n";
             cout<<"do you want to 1-save on the same file or 2-change file name \n";
             int x;
@@ -521,7 +673,7 @@ int main(){
             }else{
                 cout<<"you enter the wrong number\n";
             }
-        }else if(choice == 14){
+        }else if(choice == 18){
             cout<<"do you want to save the image before exit\n";
             cout<<"1-yes / any number-no : ";
             int y;
