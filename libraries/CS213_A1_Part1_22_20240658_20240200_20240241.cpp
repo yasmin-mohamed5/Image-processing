@@ -1,15 +1,14 @@
 /*
     Project: Image Processing - Image Filters
-    Section: 24
 
     Team Members:
-    - Yasmin Mohamed (ID: 20240658) 
+    - Yasmin Mohamed (ID: 20240658) (All-B) 
         Implemented: Rotate Filter, Invert Filter, frame Filter.
 
-    - Rawda Amr Mustafa (ID: 20240200) 
+    - Rawda Amr Mustafa (ID: 20240200) (S22)
         Implemented: grey-scale, lighten_darken, merge_images,detect_edge .
 
-    - Salma Mohamed Mahmoud (ID: 20240241)
+    - Salma Mohamed Mahmoud (ID: 20240241)(S22)
         Implemented: Black and White, Flip Image, Crop Images, Resizing Images.    
 
         
