@@ -598,20 +598,20 @@ int main(){
                 }else{
                     cout<<"you enter the wrong number\n";
                 }
-            }else{
-                cout<<"please enter the new image : ";
-                cin>>file_name;
-                try {
-                    bool loaded = image.loadNewImage(file_name);  
-                    if (loaded) {
-                        Image img(file_name);
-                        image=img;
-                        cout << "Image loaded successfully!\n";
-                    }
-                } catch (const invalid_argument& e) {
-                    cout << "Error: " << e.what() << '\n';
-                }
             }
+            cout<<"please enter the new image : ";
+            cin>>file_name;
+            try {
+                bool loaded = image.loadNewImage(file_name);  
+                if (loaded) {
+                    Image img(file_name);
+                    image=img;
+                    cout << "Image loaded successfully!\n";
+                }
+            } catch (const invalid_argument& e) {
+                cout << "Error: " << e.what() << '\n';
+            }
+            
         }else if(choice == 2){
             invert(image);
         }else if(choice == 3){
