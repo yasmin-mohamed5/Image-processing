@@ -6,7 +6,7 @@
         Implemented: Rotate Filter, Invert Filter, frame Filter, Blur Filter , Sunlight Filter, menu.
 
     - Rawda Amr Mustafa (ID: 20240200) (S22)
-        Implemented: grey-scale, lighten_darken, merge_images,detect_edge .
+        Implemented: grey-scale, lighten_darken, merge_images,detect_edge, purple .
 
     - Salma Mohamed Mahmoud (ID: 20240241)(S22)
         Implemented: Black and White, Flip Image, Crop Images, Resizing Images.    
@@ -22,12 +22,13 @@ Description:
         - Sunlight: Brightens the image and adds a warm yellowish tone, simulating natural sunlight.
         - grey scale: Turns the image into shades of grey.
         - lighten_darken: adjusts the brightness to make the image lighter or darker.
+        - detect_edge:Detects image edges by highlighting sharp changes between neighboring pixels.
+        - merge_images:Combines two images by averaging their pixel values.
+        - purple: adjusts the RGB channels to give the image purple look.
         - Black and White: This filter converts an image into a pure black and white version with no gray shades.
         - Flip Image: This filter mirrors the image either horizontally or vertically.
         - Crop Images: This filter removes unwanted parts of an image by selecting a specific rectangular to keep.
         - Resizing Images: THis filter changes the overall dimensions ( width and height ) of an image while keeping its visual content.
-        - detect_edge:Detects image edges by highlighting sharp changes between neighboring pixels.
-        - merge_images:Combines two images by averaging their pixel values.
     
 */
 
@@ -525,16 +526,15 @@ Image merge_images(Image &image1 ,Image &image2){
             }
         }
     }
-    cout<<"The filter has been applied successfully!\n";
     return merge;
 }
 void detect_edge(Image &image){
     black_and_white(image);
     Image res(image.width,image.height);
-    for(int i=0; i<image.width; i++){
-        for(int j=0; j<image.height; j++){
-            int y=abs(image(i,j+1,0)-image(i,j,0));
+    for(int i=0; i<image.width-1; i++){
+        for(int j=0; j<image.height-1; j++){
             int x=abs(image(i+1,j,0)-image(i,j,0));
+            int y=abs(image(i,j+1,0)-image(i,j,0));
             int diff=x+y;
             if(diff>100){
                 res(i,j,0)=0;
@@ -547,6 +547,17 @@ void detect_edge(Image &image){
             }
         }
     }image=res;
+    cout<<"The filter has been applied successfully!\n";
+}
+
+void purple(Image &image){
+    for(int i=0; i<image.width; i++){
+        for(int j=0; j<image.height; j++){
+            image(i,j,0) =(1 -0.4)*image(i,j,0)+0.4*150;
+            image(i,j,1) =(1 -0.3)*image(i,j,1)+0.3*50;
+            image(i,j,2) =(1 -0.4)*image(i,j,2)+0.4*180;
+        }
+    }
     cout<<"The filter has been applied successfully!\n";
 }
 
@@ -567,7 +578,7 @@ int main(){
     }
     while(true){
         cout<< "please enter a number from the following choices:\n"; 
-        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white / 7-flip_image / 8-frame /\n 9-Crop_image / 10-blur / 11-merge_image / 12-detect_edge / 13-sinlight / 14-resizing-image /15-save / 16-exit\n";
+        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white / 7-flip_image / 8-frame /\n 9-Crop_image / 10-blur / 11-merge_image / 12-detect_edge / 13-sinlight / 14-resizing-image /15-purple / 16-save / 17-exit\n";
         int choice;
         cin>>choice;
         if(choice == 1){
@@ -646,6 +657,8 @@ int main(){
         else if(choice==14) {
             resizing_image(image);
         }else if(choice == 15){
+            purple(image);
+        }else if(choice == 16){
             cout<< "please enter a number from the following choices:\n";
             cout<<"do you want to 1-save on the same file or 2-change file name \n";
             int x;
@@ -669,7 +682,7 @@ int main(){
             }else{
                 cout<<"you enter the wrong number\n";
             }
-        }else if(choice == 16){
+        }else if(choice == 17){
             cout<<"do you want to save the image before exit\n";
             cout<<"1-yes / any number-no : ";
             int y;
