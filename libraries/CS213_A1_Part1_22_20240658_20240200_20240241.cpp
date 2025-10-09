@@ -3,7 +3,7 @@
 
     Team Members:
     - Yasmin Mohamed (ID: 20240658) (All-B) 
-        Implemented: Rotate Filter, Invert Filter, frame Filter, Blur Filter , Sunlight Filter.
+        Implemented: Rotate Filter, Invert Filter, frame Filter, Blur Filter , Sunlight Filter, menu.
 
     - Rawda Amr Mustafa (ID: 20240200) (S22)
         Implemented: grey-scale, lighten_darken, merge_images,detect_edge .
