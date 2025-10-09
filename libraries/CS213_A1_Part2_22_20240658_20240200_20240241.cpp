@@ -3,6 +3,8 @@
 
     Demo: https://drive.google.com/drive/folders/1fKol4vS5zIhuUFHtJsx9AWiZOCK0Na86
 
+    Document: https://drive.google.com/drive/folders/1INCmvRTodTbPLYTTsTStvwbZpKnYfMOa
+
     Team Members:
     - Yasmin Mohamed (ID: 20240658) (All-B) 
         Implemented: Rotate Filter, Invert Filter, frame Filter, Blur Filter , Sunlight Filter, menu.
@@ -602,7 +604,7 @@ int main(){
     }
     while(true){
         cout<< "please enter a number from the following choices:\n"; 
-        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white / 7-flip_image / 8-frame / 9-Crop_image / 10-blur / 11-merge_image / 12-detect_edge / 13-sinlight / 14-resizing-image / 15-Infrared / 16-purple / 17-save / 18-exit\n";
+        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white / 7-flip_image / 8-frame / 9-Crop_image \n/ 10-blur / 11-merge_image / 12-detect_edge / 13-sinlight / 14-resizing-image / 15-Infrared / 16-purple / 17-save / 18-exit\n";
         int choice;
         cin>>choice;
         if(choice == 1){
