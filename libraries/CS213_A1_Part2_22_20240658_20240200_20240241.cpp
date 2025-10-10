@@ -200,8 +200,8 @@ void blur(Image &image){
         for(int i=0;i<image.width;i++){
             for(int j=0;j<image.height;j++){
                 double r=0,g=0,b=0,count=0;
-                for(int x=-rad;x<rad;x++){
-                    for (int y=-rad;y<rad;y++){
+                for(int x=-rad;x<=rad;x++){
+                    for (int y=-rad;y<=rad;y++){
                         int new_x=i+x;
                         int new_y=j+y;
                         if(new_x<0 || new_y<0 || new_x>=image.width || new_y>=image.height){
@@ -226,8 +226,8 @@ void blur(Image &image){
         for(int i=0;i<image.width;i++){
             for(int j=0;j<image.height;j++){
                 double r=0,g=0,b=0,count=0;
-                for(int x=-rad;x<rad;x++){
-                    for (int y=-rad;y<rad;y++){
+                for(int x=-rad;x<=rad;x++){
+                    for (int y=-rad;y<=rad;y++){
                         int new_x=i+x;
                         int new_y=j+y;
                         if(new_x<0 || new_y<0 || new_x>=image.width || new_y>=image.height){
@@ -252,8 +252,8 @@ void blur(Image &image){
         for(int i=0;i<image.width;i++){
             for(int j=0;j<image.height;j++){
                 double r=0,g=0,b=0,count=0;
-                for(int x=-rad;x<rad;x++){
-                    for (int y=-rad;y<rad;y++){
+                for(int x=-rad;x<=rad;x++){
+                    for (int y=-rad;y<=rad;y++){
                         int new_x=i+x;
                         int new_y=j+y;
                         if(new_x<0 || new_y<0 || new_x>=image.width || new_y>=image.height){
