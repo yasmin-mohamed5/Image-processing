@@ -41,7 +41,21 @@ Description:
 
 #include"Image_Class.h"
 using namespace std;
-#include<bits/stdc++.h>
+#include <iostream>
+#include <algorithm>
+
+void horiz_shearing(Image &image){
+    Image img2(image.width+(image.height),image.height);
+    for (int i = 0; i < image.width; i++){
+        for(int j=0;j<image.height;j++){
+            for(int k=0;k<3;k++){
+                img2(i+(j),j,k) = image(i,j,k);
+            }
+        }
+    }
+    image=img2;
+    cout<<"The filter has been applied successfully!\n";
+}
 
 void invert(Image &image){
     for (int i = 0; i < image.width; i++){
@@ -604,7 +618,7 @@ int main(){
     }
     while(true){
         cout<< "please enter a number from the following choices:\n"; 
-        cout<<"1-Load a new image / 2-invert / 3-rotate / 4-grey_scale / 5-darken_lighten / 6-black_and_white / 7-flip_image / 8-frame / 9-Crop_image \n/ 10-blur / 11-merge_image / 12-detect_edge / 13-sinlight / 14-resizing-image / 15-Infrared / 16-purple / 17-save / 18-exit\n";
+        cout<<"1-Load a new image \n2-invert \n3-rotate \n4-grey_scale \n5-darken_lighten \n6-black_and_white \n7-flip_image \n8-frame \n9-Crop_image \n10-blur \n11-merge_image \n12-detect_edge \n13-sinlight \n14-resizing-image \n15-Infrared \n16-purple \n17-horizontal shearing \n18-save \n19-exit\n";
         int choice;
         cin>>choice;
         if(choice == 1){
@@ -687,7 +701,10 @@ int main(){
         }
         else if(choice==16){
             purple(image);
-        }else if(choice == 17){
+        }else if(choice==17){
+            horiz_shearing(image);
+        }
+        else if(choice == 18){
             cout<< "please enter a number from the following choices:\n";
             cout<<"do you want to 1-save on the same file or 2-change file name \n";
             int x;
@@ -711,7 +728,7 @@ int main(){
             }else{
                 cout<<"you enter the wrong number\n";
             }
-        }else if(choice == 18){
+        }else if(choice == 19){
             cout<<"do you want to save the image before exit\n";
             cout<<"1-yes / any number-no : ";
             int y;
